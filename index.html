@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Semester Exam Portal | 100 Qs + 10 High-Level Bonus</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo">JS</div>
+      <div class="brand-title-wrap">
+        <h1>
+          JavaScript Semester Exam Portal
+          <span class="badge-syllabus">00.Intro → 05.Functions & Scope</span>
+        </h1>
+        <div class="brand-subtitle">
+          100 Standard Questions (Basic to Medium) + 10 High-Level Bonus Questions • Total: 347 Marks
+        </div>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <!-- Mode Switcher -->
+      <div class="mode-toggle-group">
+        <button id="mode-exam-btn" class="mode-btn active" title="Strict timed exam mode with final scorecard">
+          ⏱️ Exam Mode
+        </button>
+        <button id="mode-practice-btn" class="mode-btn" title="Instant answer check, code runner, and step-by-step explanations">
+          💡 Practice Mode
+        </button>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="timer-container" title="Time remaining in exam">
+        <span>⏳</span>
+        <span id="timer-display">120:00</span>
+      </div>
+
+      <!-- Theme Switcher -->
+      <button id="theme-toggle-btn" class="btn-icon" title="Toggle Dark / Light Mode">
+        🌙
+      </button>
+
+      <!-- Submit Exam Button -->
+      <button id="btn-submit-exam" class="btn-submit-exam" title="Finish and view complete scorecard">
+        <span>Submit Exam</span>
+        <span>✓</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Secondary Topics Filter Bar -->
+  <nav class="topics-nav-bar" id="topics-nav-bar" aria-label="Topic filter navigation">
+    <!-- Populated dynamically by app.js -->
+  </nav>
+
+  <!-- Main Exam Content Area -->
+  <main class="main-exam-container">
+    
+    <!-- Left Pane: Active Question & Interactive Controls -->
+    <section class="question-pane">
+      <div class="question-card" id="question-card">
+        
+        <!-- Question Meta Header -->
+        <div class="question-header">
+          <div class="q-meta-badges">
+            <span class="badge-num" id="badge-num">Q 1 of 110</span>
+            <span class="badge-topic" id="badge-topic">00. Introduction to JavaScript</span>
+            <span class="badge-weightage" id="badge-weightage">+1 Mark</span>
+            <span class="badge-difficulty diff-basic" id="badge-difficulty">Basic</span>
+            <span class="badge-type" id="badge-type">Multiple Choice</span>
+          </div>
+
+          <div class="q-actions-quick">
+            <button id="btn-flag-review" class="btn-flag" title="Bookmark for review before submitting">
+              <span>★</span>
+              <span>Mark for Review</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Question Title and Prompt -->
+        <h2 class="question-title-text" id="question-title">Question Title</h2>
+        <div class="question-prompt" id="question-prompt">Question description...</div>
+
+        <!-- Code Snippet Display -->
+        <div class="code-container" id="code-container" style="display: none;">
+          <div class="code-header-bar">
+            <span>JavaScript</span>
+            <button class="btn-copy-code" id="btn-copy-code">Copy Code</button>
+          </div>
+          <pre class="code-block" id="code-block"><code></code></pre>
+        </div>
+
+        <!-- Dynamic Answer Area -->
+        <div id="answer-area">
+          <!-- Populated by app.js based on question type -->
+        </div>
+
+        <!-- Practice Mode Explanation Accordion -->
+        <div id="explanation-container"></div>
+
+        <!-- Bottom Question Navigation Toolbar -->
+        <div class="question-nav-bar">
+          <div class="nav-group-left">
+            <button id="btn-prev" class="btn-nav btn-secondary" title="Shortcut: Left Arrow or 'p'">
+              ← Previous
+            </button>
+            <button id="btn-clear" class="btn-nav btn-secondary" title="Clear current selection">
+              Clear Response
+            </button>
+            <button id="btn-check-ans" class="btn-nav btn-check-ans" style="display: none;">
+              ✓ Check Answer
+            </button>
+          </div>
+
+          <div class="nav-group-right">
+            <button id="btn-review-next" class="btn-nav btn-review-next" title="Shortcut: 'r'">
+              Mark & Next →
+            </button>
+            <button id="btn-save-next" class="btn-nav btn-primary" title="Shortcut: Right Arrow or 'n'">
+              Save & Next →
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Collapsible JavaScript Scratchpad / Sandbox -->
+      <div class="scratchpad-container">
+        <div class="scratchpad-header" id="scratchpad-toggle">
+          <div class="scratchpad-title">
+            <span>⚡ In-Browser JavaScript Scratchpad (Test snippets live)</span>
+          </div>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">▼ Toggle</span>
+        </div>
+        <div class="scratchpad-body" id="scratchpad-body">
+          <textarea id="scratchpad-code" class="scratchpad-editor" placeholder="// Write or paste any JavaScript code to test console outputs here...&#10;let a = 10;&#10;console.log(a * 2);"></textarea>
+          <div class="scratchpad-controls">
+            <button id="btn-run-scratchpad" class="btn-nav btn-primary" style="padding: 0.4rem 0.9rem;">▶ Run Code</button>
+            <button id="btn-clear-scratchpad" class="btn-nav btn-secondary" style="padding: 0.4rem 0.9rem;">Clear</button>
+          </div>
+          <div class="scratchpad-output" id="scratchpad-output">Output will appear here...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Pane: Question Palette & Quick Navigator -->
+    <aside class="palette-pane" aria-label="Question Navigation Palette">
+      <div class="palette-header">
+        <h3>Question Navigator</h3>
+        <p>Click any question number to jump directly</p>
+      </div>
+
+      <!-- Quick Status Count Cards -->
+      <div class="stats-summary-grid">
+        <div class="stat-pill">
+          <div class="stat-val" id="stat-answered" style="color: var(--color-answered);">0</div>
+          <div class="stat-lbl">Answered</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="stat-remaining" style="color: var(--text-secondary);">110</div>
+          <div class="stat-lbl">Remaining</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="stat-review" style="color: var(--color-review);">0</div>
+          <div class="stat-lbl">Review</div>
+        </div>
+      </div>
+
+      <!-- Status Legend -->
+      <div class="palette-legend">
+        <div class="legend-item"><span class="legend-dot dot-answered"></span> Answered</div>
+        <div class="legend-item"><span class="legend-dot dot-unanswered"></span> Visited / Unanswered</div>
+        <div class="legend-item"><span class="legend-dot dot-review"></span> Marked Review</div>
+        <div class="legend-item"><span class="legend-dot dot-ans-review"></span> Answered & Review</div>
+        <div class="legend-item"><span class="legend-dot dot-not-visited"></span> Not Visited</div>
+        <div class="legend-item"><span style="color: #f472b6;">★</span> High-Level Bonus</div>
+      </div>
+
+      <!-- 110 Question Grid Buttons -->
+      <div class="q-grid-wrap">
+        <div class="q-grid-section-title">
+          <span>All 110 Questions (01 to 110)</span>
+        </div>
+        <div class="q-buttons-grid" id="q-buttons-grid">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Submit Confirmation Modal -->
+  <div class="modal-overlay" id="confirm-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Submit Exam Confirmation</h2>
+        <p style="color: var(--text-secondary); margin-top: 0.25rem;">
+          Are you sure you want to finish and submit your exam?
+        </p>
+      </div>
+
+      <div class="stats-summary-grid" style="margin: 1.5rem 0;">
+        <div class="stat-pill">
+          <div class="stat-val" id="modal-answered-count" style="color: var(--color-answered);">0</div>
+          <div class="stat-lbl">Answered</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="modal-remaining-count" style="color: var(--color-unanswered);">110</div>
+          <div class="stat-lbl">Unattempted</div>
+        </div>
+        <div class="stat-pill">
+          <div class="stat-val" id="modal-review-count" style="color: var(--color-review);">0</div>
+          <div class="stat-lbl">Marked for Review</div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+        You will see your comprehensive scorecard with topic-wise performance breakdown immediately after submission.
+      </p>
+
+      <div class="modal-actions">
+        <button id="btn-cancel-submit" class="btn-nav btn-secondary">← Resume Exam</button>
+        <button id="btn-final-submit" class="btn-nav btn-primary" style="background: var(--accent-success); color: white; border-color: var(--accent-success);">
+          Confirm & Submit Exam ✓
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Results & Scorecard Modal -->
+  <div class="modal-overlay" id="result-modal">
+    <div class="modal-content" style="max-width: 720px;">
+      <div class="modal-header">
+        <h2>🎉 Exam Scorecard & Performance Analysis</h2>
+        <p style="color: var(--text-secondary);">JavaScript Semester 1 Comprehensive Assessment</p>
+      </div>
+
+      <!-- Big Score Circle -->
+      <div class="score-circle-wrap">
+        <div class="score-badge-big">
+          <div class="score-percentage" id="result-score-percent">0.0%</div>
+          <div class="score-marks-label" id="result-marks-detail">0 / 347 Marks</div>
+        </div>
+        <div class="grade-banner" id="result-grade-banner">Grade: Pending</div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.35rem;" id="result-accuracy">
+          Correct: 0/110 • Attempted: 0/110
+        </div>
+      </div>
+
+      <!-- Topic Performance Breakdown -->
+      <h3 style="font-size: 1rem; font-weight: 700; margin-top: 1.25rem;">Topic-Wise Performance Breakdown</h3>
+      <div class="topic-breakdown-list" id="topic-breakdown-list">
+        <!-- Rendered by app.js -->
+      </div>
+
+      <div class="modal-actions" style="flex-wrap: wrap;">
+        <button id="btn-review-questions" class="btn-nav btn-primary">
+          📖 Review All Solutions in Practice Mode
+        </button>
+        <button id="btn-print-scorecard" class="btn-nav btn-secondary">
+          🖨️ Print / Save PDF
+        </button>
+        <button id="btn-retake-exam" class="btn-nav btn-secondary" style="color: #f87171;">
+          🔄 Retake Exam
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Questions Bank then Main Engine -->
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
